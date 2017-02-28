@@ -14,4 +14,10 @@ RSpec.describe NumberToWord do
                        %w(bat contour), %w(cat contour), 'catamounts']
     expect(NumberToWord.call(2_282_668_687)).to(match_array(expected_result))
   end
+
+  context 'Perfomence' do
+    it 'Perfome within 1000ms' do
+      expect { NumberToWord.call(2_282_668_687) }.to perform_under(1000).ms
+    end
+  end
 end
