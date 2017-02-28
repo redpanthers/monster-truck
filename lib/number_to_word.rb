@@ -33,11 +33,11 @@ class NumberToWord
     results = number_combinations.map do |combination|
       [number_to_word[combination[0]], number_to_word[combination[1]]]
     end
-    results = results.reject{|list| list.any?(&:nil?) }.map { |first, second|  first.product(second)}.flatten(1)
-    
+    results = results.reject { |list| list.any?(&:nil?) }.flat_map { |first, second| first.product(second) }
+
     full_words = number_to_word[@number.to_s]
-    results =  results.reject {|first,second| full_words.include? (first+second)}
-    results = results + full_words
+    results =  results.reject { |first, second| full_words.include? (first + second) }
+    results += full_words
 
     results
   end
@@ -66,6 +66,6 @@ class NumberToWord
   end
 
   def number_combinations
-    (0..4).map {|i| [@number.to_s[0..i+2] , @number.to_s[i+3..-1]] }
+    (0..4).map { |i| [@number.to_s[0..i + 2], @number.to_s[i + 3..-1]] }
   end
 end
