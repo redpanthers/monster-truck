@@ -3,6 +3,8 @@ class DictBuilder
     new.call(*args)
   end
 
+  # Build an in memmory hash to using the words from dictionary
+  # @return [Hash] with word as value and number representation as key
   def call
     number_to_word = {}
     dictionary.each do |word|
@@ -18,15 +20,21 @@ class DictBuilder
 
   private
 
+  # Read dictionary from file
+  # @return [Array] words in file
   def dictionary
     dictionary_path = File.expand_path('../../data/dictionary.txt', __FILE__)
     File.open(dictionary_path).readlines
   end
 
+  # Convert strings to number form
+  # @param [String] the word to be converted
+  # @return [String] the number maped from input string
   def string_to_numbers(s)
     s.chars.map { |c| char_to_number(c).to_s }.join
   end
 
+  # Mapping characters to number
   def char_to_number(ch)
     case ch.downcase
     when 'a', 'b', 'c'      then 2
