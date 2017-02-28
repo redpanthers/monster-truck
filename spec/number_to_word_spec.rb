@@ -17,7 +17,8 @@ RSpec.describe NumberToWord do
 
   context 'Perfomence' do
     it 'Perfome within 1000ms' do
-      expect { NumberToWord.call(2_282_668_687) }.to perform_under(1000).ms
+      number = Array.new(10) { rand(10) }.join.to_i
+      expect { NumberToWord.call(number) }.to perform_under(1000).ms
     end
   end
 end

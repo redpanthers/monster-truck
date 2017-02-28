@@ -22,7 +22,7 @@ class DictBuilder
     dictionary_path = File.expand_path('../../data/dictionary.txt', __FILE__)
     File.open(dictionary_path).readlines
   end
-  
+
   def string_to_numbers(s)
     s.chars.map { |c| char_to_number(c).to_s }.join
   end
@@ -39,5 +39,4 @@ class DictBuilder
     when 'w', 'x', 'y', 'z' then 9
     end
   end
-
 end

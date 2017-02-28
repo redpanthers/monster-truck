@@ -20,16 +20,16 @@ class NumberToWord
 
     full_words = dictionary[number.to_s]
     results =  results.reject { |first, second| full_words.include? (first + second) }
-    results += full_words
+    results += full_words if full_words
 
     results
   end
 
-  def dictionary
-    @@_dictionary ||= ::DictBuilder.call()
-  end
-
   private
+
+  def dictionary
+    @@_dictionary ||= ::DictBuilder.call
+  end
 
   def number_combinations
     (0..4).map { |i| [@number.to_s[0..i + 2], @number.to_s[i + 3..-1]] }
