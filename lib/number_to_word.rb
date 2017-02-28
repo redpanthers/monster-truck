@@ -25,17 +25,21 @@ class NumberToWord
     @dictionary.readlines.each do |word|
       num = string_to_numbers(word)
       if number_to_word[num]
-        number_to_word[num] << word
+        number_to_word[num] << word.downcase.chomp
       else
-        number_to_word[num] = [word]
+        number_to_word[num] = [word.downcase.chomp]
       end
     end
-    number_combinations.map do |combination|
-      [number_to_word[combination[0]], number_to_word[combination[1]]].flatten.compact
-    end + 
-    [
-      number_to_word[@number.to_s]
-    ]
+    results = number_combinations.map do |combination|
+      [number_to_word[combination[0]], number_to_word[combination[1]]]
+    end
+    results = results.reject{|list| list.any?(&:nil?) }.map { |first, second|  first.product(second)}.flatten(1)
+    
+    full_words = number_to_word[@number.to_s]
+    results =  results.reject {|first,second| full_words.include? (first+second)}
+    results = results + full_words
+
+    results
   end
 
   private
